@@ -43,11 +43,15 @@ export namespace Contributors {
         let results: string[] = [];
         let files = ext.packageJSON.contributes[name];
         if (files && files.length) {
-            files.forEach(file => {
+            files.forEach((file: string|{ path: string }) => {
+                if (typeof file === "object") {
+                    if (!file.path) return;
+                    file = file.path;
+                };
                 if (!path.isAbsolute(file))
                     file = path.join(ext.extensionPath, file);
                 if (!fs.existsSync(file)) return;
-                results.push(file);
+                results.push(file as string);
             });
         }
         return results;

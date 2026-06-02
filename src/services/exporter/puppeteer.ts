@@ -1,5 +1,4 @@
 import * as puppeteer from 'puppeteer';
-import {PUPPETEER_REVISIONS} from 'puppeteer-core/lib/cjs/puppeteer/revisions.js';
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -13,7 +12,7 @@ import { context } from '../../extension';
 class PuppeteerExporter implements MarkdownExporter {
     async Export(items: ExportItem[], progress: Progress) {
         let count = items.length;
-        if (!this.checkPuppeteerBinary()) {
+        if (!await this.checkPuppeteerBinary()) {
             let result = await vscode.window.showInformationMessage("Do you want to download exporter dependency Chromium?", "Yes", "No");
             if (result == "Yes") {
                 await this.fetchBinary(progress);
@@ -58,7 +57,7 @@ class PuppeteerExporter implements MarkdownExporter {
         let ptConf: any = {};
         mkdirsSync(path.dirname(item.fileName));
 
-        await page.setContent(html, { waitUntil: 'networkidle0' });
+        await page.setContent(html, { waitUntil: 'load' });
         switch (item.format) {
             case exportFormat.PDF:
                 ptConf = mergeSettings(
@@ -92,25 +91,33 @@ class PuppeteerExporter implements MarkdownExporter {
         ].indexOf(format) > -1;
     }
 
-    private checkPuppeteerBinary() {
-        return config.puppeteerExecutable || fs.existsSync(puppeteer.executablePath());
+    private async checkPuppeteerBinary() {
+        if (config.puppeteerExecutable) return true;
+        try {
+            const execPath = await puppeteer.executablePath();
+            return fs.existsSync(execPath);
+        } catch {
+            return false;
+        }
     }
+    
     private async fetchBinary(progress: Progress) {
-        let pt = require('puppeteer');
-        let fetcher = pt.createBrowserFetcher();
-        const revisionInfo = fetcher.revisionInfo(PUPPETEER_REVISIONS.chromium);
-        let lastPg = 0;
         progress.report({
             message: "Downloading Chromium...",
         });
-        return fetcher.download(revisionInfo.revision, (downloadedBytes: number, totalBytes: number) => {
-            let pg: number = ~~(downloadedBytes / totalBytes * 100);
-            if (pg - lastPg) progress.report({
-                message: `Downloading Chromium...(${pg}%)`,
-                increment: pg - lastPg
+        try {
+            // puppeteer v25+ handles browser downloads automatically
+            // This will download the browser if it's not already present
+            await puppeteer.launch({
+                headless: true,
+            }).then(browser => browser.close());
+            progress.report({
+                message: "Download complete",
+                increment: 100
             });
-            lastPg = pg;
-        });
+        } catch (error) {
+            return Promise.reject(`Failed to download Chromium: ${error}`);
+        }
     }
 }
 export const puppeteerExporter = new PuppeteerExporter();

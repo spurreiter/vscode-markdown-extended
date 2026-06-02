@@ -1,62 +1,29 @@
 {
   "name": "markdown-extended",
   "displayName": "Markdown Extended",
+  "version": "1.1.5-0",
   "description": "Extended syntaxes to built-in markdown & What you see is what you get exporter.",
-  "icon": "images/logo.png",
-  "version": "1.1.4",
-  "publisher": "jebbs",
-  "engines": {
-    "vscode": "^1.54.0"
-  },
-  "license": "SEE LICENSE IN LICENSE.txt",
+  "categories": [
+    "Other"
+  ],
+  "homepage": "https://github.com/qjebbs/vscode-markdown-extended/blob/master/README.md",
   "bugs": {
     "url": "https://github.com/qjebbs/vscode-markdown-extended/issues"
   },
-  "homepage": "https://github.com/qjebbs/vscode-markdown-extended/blob/master/README.md",
   "repository": {
     "type": "git",
     "url": "https://github.com/qjebbs/vscode-markdown-extended.git"
   },
-  "categories": [
-    "Other"
-  ],
-  "activationEvents": [
-    "onLanguage:markdown",
-    "onCommand:markdownExtended.export",
-    "onCommand:markdownExtended.exportWorkspace",
-    "onCommand:markdownExtended.copy",
-    "onCommand:markdownExtended.copyWithStyle",
-    "onCommand:markdownExtended.pasteAsTable",
-    "onCommand:markdownExtended.formateTable",
-    "onCommand:markdownExtended.toggleBold",
-    "onCommand:markdownExtended.toggleCodeBlock",
-    "onCommand:markdownExtended.toggleCodeInline",
-    "onCommand:markdownExtended.toggleItalics",
-    "onCommand:markdownExtended.toggleSubscript",
-    "onCommand:markdownExtended.toggleOList",
-    "onCommand:markdownExtended.toggleStrikethrough",
-    "onCommand:markdownExtended.toggleUList",
-    "onCommand:markdownExtended.toggleUnderLine",
-    "onCommand:markdownExtended.toggleMark",
-    "onCommand:markdownExtended.toggleSuperscript",
-    "onCommand:markdownExtended.toggleBlockQuote",
-    "onCommand:markdownExtended.addColumnRight",
-    "onCommand:markdownExtended.addColumnLeft",
-    "onCommand:markdownExtended.addRowBelow",
-    "onCommand:markdownExtended.addRowAbove",
-    "onCommand:markdownExtended.DeleteColumn",
-    "onCommand:markdownExtended.DeleteRow",
-    "onCommand:markdownExtended.MoveColumnLeft",
-    "onCommand:markdownExtended.MoveColumnRight"
-  ],
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "publisher": "jebbs",
   "main": "./out/src/extension",
+  "scripts": {
+    "build": "npm run compile && vsce package",
+    "compile": "tsc -p ./",
+    "vscode:prepublish": "find node_modules/puppeteer -name '.local*' | xargs rm -rf && npm run compile",
+    "watch": "tsc -watch -p ./"
+  },
   "contributes": {
-    "snippets": [
-      {
-        "language": "markdown",
-        "path": "./snippets/markdown.code-snippets"
-      }
-    ],
     "commands": [
       {
         "command": "markdownExtended.export",
@@ -189,41 +156,6 @@
         "category": "Markdown"
       }
     ],
-    "menus": {
-      "editor/context": [
-        {
-          "when": "editorLangId == markdown",
-          "command": "markdownExtended.export",
-          "group": "markdown"
-        },
-        {
-          "when": "editorLangId == markdown",
-          "command": "markdownExtended.copy",
-          "group": "markdown"
-        },
-        {
-          "when": "editorLangId == markdown",
-          "command": "markdownExtended.copyWithStyle",
-          "group": "markdown"
-        },
-        {
-          "when": "editorLangId == markdown",
-          "command": "markdownExtended.pasteAsTable",
-          "group": "markdown"
-        },
-        {
-          "when": "editorLangId == markdown",
-          "command": "markdownExtended.formateTable",
-          "group": "markdown"
-        }
-      ],
-      "explorer/context": [
-        {
-          "command": "markdownExtended.exportWorkspace",
-          "group": "markdown"
-        }
-      ]
-    },
     "configuration": {
       "type": "object",
       "title": "Markdown Extended Configuration",
@@ -341,29 +273,88 @@
     "markdown.previewStyles": [
       "styles/markdown-it-admonition.css",
       "styles/markdown-it-kbd.css"
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "editorLangId == markdown",
+          "command": "markdownExtended.export",
+          "group": "markdown"
+        },
+        {
+          "when": "editorLangId == markdown",
+          "command": "markdownExtended.copy",
+          "group": "markdown"
+        },
+        {
+          "when": "editorLangId == markdown",
+          "command": "markdownExtended.copyWithStyle",
+          "group": "markdown"
+        },
+        {
+          "when": "editorLangId == markdown",
+          "command": "markdownExtended.pasteAsTable",
+          "group": "markdown"
+        },
+        {
+          "when": "editorLangId == markdown",
+          "command": "markdownExtended.formateTable",
+          "group": "markdown"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "markdownExtended.exportWorkspace",
+          "group": "markdown"
+        }
+      ]
+    },
+    "snippets": [
+      {
+        "language": "markdown",
+        "path": "./snippets/markdown.code-snippets"
+      }
     ]
   },
-  "scripts": {
-    "vscode:prepublish": "find node_modules/puppeteer -name '.local*' | xargs rm -rf && npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./"
-  },
-  "devDependencies": {
-    "@types/mocha": "^10.0.6",
-    "@types/node": "18.x",
-    "@types/vscode": "^1.54.0",
-    "typescript": "^5.4.3"
-  },
+  "activationEvents": [
+    "onLanguage:markdown",
+    "onCommand:markdownExtended.export",
+    "onCommand:markdownExtended.exportWorkspace",
+    "onCommand:markdownExtended.copy",
+    "onCommand:markdownExtended.copyWithStyle",
+    "onCommand:markdownExtended.pasteAsTable",
+    "onCommand:markdownExtended.formateTable",
+    "onCommand:markdownExtended.toggleBold",
+    "onCommand:markdownExtended.toggleCodeBlock",
+    "onCommand:markdownExtended.toggleCodeInline",
+    "onCommand:markdownExtended.toggleItalics",
+    "onCommand:markdownExtended.toggleSubscript",
+    "onCommand:markdownExtended.toggleOList",
+    "onCommand:markdownExtended.toggleStrikethrough",
+    "onCommand:markdownExtended.toggleUList",
+    "onCommand:markdownExtended.toggleUnderLine",
+    "onCommand:markdownExtended.toggleMark",
+    "onCommand:markdownExtended.toggleSuperscript",
+    "onCommand:markdownExtended.toggleBlockQuote",
+    "onCommand:markdownExtended.addColumnRight",
+    "onCommand:markdownExtended.addColumnLeft",
+    "onCommand:markdownExtended.addRowBelow",
+    "onCommand:markdownExtended.addRowAbove",
+    "onCommand:markdownExtended.DeleteColumn",
+    "onCommand:markdownExtended.DeleteRow",
+    "onCommand:markdownExtended.MoveColumnLeft",
+    "onCommand:markdownExtended.MoveColumnRight"
+  ],
   "dependencies": {
     "clipboardy": "^2.3.0",
-    "highlight.js": "^11.9.0",
-    "js-yaml": "^4.1.0",
+    "highlight.js": "^11.11.1",
+    "js-yaml": "^4.2.0",
     "markdown-it-abbr": "^2.0.0",
-    "markdown-it-attrs": "^4.1.6",
+    "markdown-it-attrs": "^4.5.0",
     "markdown-it-bracketed-spans": "^1.0.1",
     "markdown-it-checkbox": "^1.1.0",
     "markdown-it-container": "^4.0.0",
-    "markdown-it-deflist": "^3.0.0",
+    "markdown-it-deflist": "^3.0.1",
     "markdown-it-emoji": "^2.0.2",
     "markdown-it-footnote": "^4.0.0",
     "markdown-it-html5-embed": "^0.3.3",
@@ -374,7 +365,18 @@
     "markdown-it-sup": "^2.0.0",
     "markdown-it-table-of-contents": "^0.6.0",
     "markdown-it-underline": "^1.0.1",
-    "papaparse": "^5.4.1",
-    "puppeteer": "^19.4.1"
-  }
+    "papaparse": "^5.5.3",
+    "puppeteer": "^25.1.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^18.19.130",
+    "@types/vscode": "^1.120.0",
+    "@vscode/vsce": "^3.9.1",
+    "typescript": "^5.9.3"
+  },
+  "engines": {
+    "vscode": "^1.120.0"
+  },
+  "icon": "images/logo.png"
 }
