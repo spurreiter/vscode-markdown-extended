@@ -3,6 +3,16 @@
 [![version](https://img.shields.io/vscode-marketplace/v/jebbs.markdown-extended.svg?style=flat-square&label=vscode%20marketplace)](https://marketplace.visualstudio.com/items?itemName=jebbs.markdown-extended)
 [![installs](https://img.shields.io/vscode-marketplace/d/jebbs.markdown-extended.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=jebbs.markdown-extended)
 
+> 📝 NOTE: This fork is not published to the VSCode extension marketplace.
+> Clone, build and install with
+> ````sh
+> git clone https://github.com/spurreiter/vscode-markdown-extended
+> cd vscode-markdown-extended
+> npm i
+> npm run build
+> ````
+> Then install the .vsix file through the VSCode extensions '...' > Install from VSIX... 
+
 Markdown Extended is an extension extends syntaxes and abilities to VSCode built-in markdown function.
 
 Markdown Extended includes lots of editing helpers and a `what you see is what you get` exporter, which means export files are consistent to what you see in markdown preview, even it contains syntaxes and styles contributed by other plugins.
@@ -10,36 +20,34 @@ Markdown Extended includes lots of editing helpers and a `what you see is what y
 ## Features
 
 - Exporter ([View Detail](#Exporter))
+  - Export to Self Contained HTML / PDF / PNG / JPEG
+  - Export current document / workspace
+  - Copy exported HTML to clipboard
 
-    - Export to Self Contained HTML / PDF / PNG / JPEG
-    - Export current document / workspace
-    - Copy exported HTML to clipboard
-- Editing Helpers ([View Detail](#editing-helpers-and-keys)): 
-
-    - Paste, format table.  
-    - Add, delete and move table columns & rows.  
-    - Toggle various formates, eg.: bold, italics, underline, strikethrough, code inline, code block, block quote, superscript, subscript, unordered list, ordered list.
+- Editing Helpers ([View Detail](#editing-helpers-and-keys)):
+  - Paste, format table.
+  - Add, delete and move table columns & rows.
+  - Toggle various formates, eg.: bold, italics, underline, strikethrough, code inline, code block, block quote, superscript, subscript, unordered list, ordered list.
 
 - Extended Language Features ([View Detail](#extended-syntaxes)):
-
-    - Admonition (built-in), [View Document](#admonition)
-    - Enhanced Anchor Link (built-in), [View Document](#enhanced-anchor-link)
-    - [markdown-it-table-of-contents](https://www.npmjs.com/package/markdown-it-table-of-contents)
-    - [markdown-it-footnote](https://www.npmjs.com/package/markdown-it-footnote)
-    - [markdown-it-abbr](https://www.npmjs.com/package/markdown-it-abbr)
-    - [markdown-it-deflist](https://www.npmjs.com/package/markdown-it-deflist)
-    - [markdown-it-sup](https://www.npmjs.com/package/markdown-it-sup)
-    - [markdown-it-sub](https://www.npmjs.com/package/markdown-it-sub)
-    - [markdown-it-checkbox](https://www.npmjs.com/package/markdown-it-checkbox)
-    - [markdown-it-attrs](https://www.npmjs.com/package/markdown-it-attrs)
-    - [markdown-it-kbd](https://www.npmjs.com/package/markdown-it-kbd)
-    - [markdown-it-underline](https://www.npmjs.com/package/markdown-it-underline)
-    - [markdown-it-multimd-table](https://www.npmjs.com/package/markdown-it-multimd-table)
-    - [markdown-it-emoji](https://www.npmjs.com/package/markdown-it-emoji)
-    - [markdown-it-html5-embed](https://www.npmjs.com/package/markdown-it-html5-embed)
-    - [markdown-it-toc](https://www.npmjs.com/package/markdown-it-toc)
-    - [markdown-it-container](https://www.npmjs.com/package/markdown-it-container)
-    - [markdown-it-mark](https://www.npmjs.com/package/markdown-it-mark)
+  - Admonition (built-in), [View Document](#admonition)
+  - Enhanced Anchor Link (built-in), [View Document](#enhanced-anchor-link)
+  - [markdown-it-table-of-contents](https://www.npmjs.com/package/markdown-it-table-of-contents)
+  - [markdown-it-footnote](https://www.npmjs.com/package/markdown-it-footnote)
+  - [markdown-it-abbr](https://www.npmjs.com/package/markdown-it-abbr)
+  - [markdown-it-deflist](https://www.npmjs.com/package/markdown-it-deflist)
+  - [markdown-it-sup](https://www.npmjs.com/package/markdown-it-sup)
+  - [markdown-it-sub](https://www.npmjs.com/package/markdown-it-sub)
+  - [markdown-it-checkbox](https://www.npmjs.com/package/markdown-it-checkbox)
+  - [markdown-it-attrs](https://www.npmjs.com/package/markdown-it-attrs)
+  - [markdown-it-kbd](https://www.npmjs.com/package/markdown-it-kbd)
+  - [markdown-it-underline](https://www.npmjs.com/package/markdown-it-underline)
+  - [markdown-it-multimd-table](https://www.npmjs.com/package/markdown-it-multimd-table)
+  - [markdown-it-emoji](https://www.npmjs.com/package/markdown-it-emoji)
+  - [markdown-it-html5-embed](https://www.npmjs.com/package/markdown-it-html5-embed)
+  - [markdown-it-toc](https://www.npmjs.com/package/markdown-it-toc)
+  - [markdown-it-container](https://www.npmjs.com/package/markdown-it-container)
+  - [markdown-it-mark](https://www.npmjs.com/package/markdown-it-mark)
 
 > Post an issue on [GitHub][issues] if you want other plugins.
 
@@ -57,9 +65,10 @@ Available names: toc, container, admonition, footnote, abbr, sup, sub, checkbox,
 
 The extension works with other markdown plugin extensions (those who contribute to built-in Markdown engine) well, **Both Preview and Export**.
 Like:
+
 - [Markdown Preview Github Styling
-](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-preview-github-styles)
-- [Markdown+Math](https://marketplace.visualstudio.com/items?itemName=goessner.mdmath) 
+  ](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-preview-github-styles)
+- [Markdown+Math](https://marketplace.visualstudio.com/items?itemName=goessner.mdmath)
 - [Markdown Preview Mermaid Support](https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid)
 
 The extension does not tend to do all the work, so just use them, those plugins could be deeper developed, with better experience.
@@ -73,8 +82,6 @@ Find in command palette, or right click on an editor / workspace folder, and exe
 
 The export files are organized in `out` directory in the root of workspace folder by default.
 
-
-
 ### Export Configurations
 
 You can configure exporting for multiple documents with user settings.
@@ -84,22 +91,23 @@ Further, you can add per-file settings inside markdown to override user settings
 ```markdown
 ---
 puppeteer:
-    pdf:
-        format: A4
-        displayHeaderFooter: true
-        margin:
-            top: 1cm
-            right: 1cm
-            bottom: 1cm
-            left: 1cm
-    image:
-        quality: 90
-        fullPage: true
+  pdf:
+    format: A4
+    displayHeaderFooter: true
+    margin:
+      top: 1cm
+      right: 1cm
+      bottom: 1cm
+      left: 1cm
+  image:
+    quality: 90
+    fullPage: true
 ---
+
 contents goes here...
 ```
 
-See all available settings for 
+See all available settings for
 [puppeteer.pdf](https://github.com/GoogleChrome/puppeteer/blob/v1.4.0/docs/api.md#pagepdfoptions), and
 [puppeteer.image](https://github.com/GoogleChrome/puppeteer/blob/v1.4.0/docs/api.md#pagescreenshotoptions)
 
@@ -107,9 +115,9 @@ See all available settings for
 
 ### Editing Helpers and Keys
 
-> Inspired by 
-[joshbax.mdhelper](https://marketplace.visualstudio.com/items?itemName=joshbax.mdhelper),
-but totally new implements.
+> Inspired by
+> [joshbax.mdhelper](https://marketplace.visualstudio.com/items?itemName=joshbax.mdhelper),
+> but totally new implements.
 
 Default Keyboard Shortcut bindings are removed due to conflict issues on platforms, please consider:
 
@@ -158,7 +166,7 @@ Default Keyboard Shortcut bindings are removed due to conflict issues on platfor
 | 5     |             `table` | [Markdown](#paste-as-markdown-table) | [Table](#paste-as-markdown-table)   |
 | 6     |               `kbd` |        `<kbd>Keyboard</kbd>`         | <kbd>Keyboard</kbd>                 |
 | 7     | `admonition` `note` |         `!!! warn`<br>`text`         | [addmonition](#admonition)          |
-| 8     |          `footnote` |     `[^abc]`  <br> `[^abc]: ABC`     | [footnote](#markdown-it-footnote)   |
+| 8     |          `footnote` |     `[^abc]` <br> `[^abc]: ABC`      | [footnote](#markdown-it-footnote)   |
 | 9     |         `container` |  [markdown](#markdown-it-container)  | [container](#markdown-it-container) |
 | 10    |              `abbr` |       `*[ABBR]: Abbreviation `       | [abbr](#markdown-it-abbr)           |
 | 11    |              `attr` |    `**attr**{style="color:red"}`     | **attr**{style="color:red"}         |
@@ -205,7 +213,7 @@ Nesting supported (by indent) admonition, the following shows a danger admonitio
 
 ```markdown
 !!! danger ""
-    This is the danger admonition body
+This is the danger admonition body
 ```
 
 ![admonition-demo](images/admonition-demo2.png)
@@ -267,7 +275,6 @@ is maintained by the <abbr title="World Wide Web Consortium">W3C</abbr>.</p>
 <p data-line="24" class="code-line"><input type="checkbox" id="checkbox71"><label for="checkbox71">unchecked</label>
 <input type="checkbox" id="checkbox70" checked="true"><label for="checkbox70">checked</label></p>
 
-
 ### markdown-it-attrs
 
     item **bold red**{style="color:red"}
@@ -301,7 +308,7 @@ is maintained by the <abbr title="World Wide Web Consortium">W3C</abbr>.</p>
 
 ![container-demo.png](./images/container-demo.png)
 
-*(Rendered with style bootstrap, to see the same result, you need the follow config)*
+_(Rendered with style bootstrap, to see the same result, you need the follow config)_
 
 ```json
 "markdown.styles": [
